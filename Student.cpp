@@ -1,12 +1,15 @@
 #include "Student.h"
 
-
 //默认构造函数
-Student::Student() {}
+Student::Student() 
+{
+}
 
 //有参构造函数
 Student::Student(int id, string name, string pwd)
 {
+	cout << endl;
+
 
 }
 

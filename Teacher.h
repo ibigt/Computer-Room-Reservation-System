@@ -1,10 +1,9 @@
 #pragma once
-#include <iostream>
 #include "Identity.h"
 
 using namespace std;
 
-class Teacher :Identity
+class Teacher : public Identity
 {
 	public:
 		//默认构造函数

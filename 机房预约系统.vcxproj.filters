@@ -41,5 +41,19 @@
     <ClInclude Include="Manager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GlobalFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="admin.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="student.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="teacher.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

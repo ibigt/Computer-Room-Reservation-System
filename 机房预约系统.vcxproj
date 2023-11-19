@@ -134,9 +134,15 @@
     <ClCompile Include="机房预约系统 .cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GlobalFile.h" />
     <ClInclude Include="Identity.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Student.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="admin.txt" />
+    <Text Include="student.txt" />
+    <Text Include="teacher.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

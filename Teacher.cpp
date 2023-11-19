@@ -1,4 +1,4 @@
-#include"teacher.h"
+#include "Teacher.h"
 
 //Ä¬ÈÏ¹¹Ôì
 Teacher::Teacher()
