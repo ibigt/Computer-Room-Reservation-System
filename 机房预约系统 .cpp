@@ -69,6 +69,7 @@ void LoginIn(string fileName, int type)
 			if (fId == id && fName == name && fPwd == pwd)
 			{
 				cout << "学生 " << name << " 登录验证成功！" << endl;
+				cout << string(30, '-') << endl;
 				system("pause");
 				system("cls");
 				person = new Student(id, name, pwd);
@@ -85,6 +86,7 @@ void LoginIn(string fileName, int type)
 			if (fId == id && fName == name && fPwd == pwd)
 			{
 				cout << "教师 " << name << " 登录验证成功！" << endl;
+				cout << string(30, '-') << endl;
 				system("pause");
 				system("cls");
 				person = new Teacher(id, name, pwd);
@@ -95,21 +97,77 @@ void LoginIn(string fileName, int type)
 	}
 	else if(type == 3)
 	{
-		//管理员登陆验证
-		if (fId == id && fName == name && fPwd == pwd)
+		while (ifs >> fName && ifs >> fPwd)
 		{
-			cout << "管理员 " << name << " 登录验证成功！" << endl;
-			system("pause");
-			system("cls");
-			person = new Manager(name, pwd);
-			return;
+			//管理员登陆验证
+			if (fName == name && fPwd == pwd)
+			{
+				cout << "管理员 " << name << " 登录验证成功！" << endl;
+				cout << string(30, '-') << endl;
+				//system("pause");
+				system("cls");
+				person = new Manager(name, pwd);
+				return;
+			}
 		}
+
 	}
 
 	cout << "登录验证失败！" << endl;
 	system("pause");
 	system("cls");
 	return;
+}
+
+void managerMenu(Identity* person)
+{
+	while (true)
+	{
+		//管理员菜单
+		person->operMenu();
+
+		//父类指针强转成子类指针，可以调用私有接口
+		Manager* manager = (Manager*)person;
+
+		int select;
+		cin >> select;
+		
+		switch(select)
+		{
+			case 1:
+			{
+				cout << "添加账号" << endl;
+				manager->addPerson();
+				break;
+			}
+			case 2:
+			{
+				cout << "查看账号" << endl;
+				manager->showPerson();
+				break;
+			}
+			case 3:
+			{
+				cout << "查看机房" << endl;
+				manager->showComputer();
+				break;
+			}
+			case 4:
+			{
+				cout << "清空预约" << endl;
+				manager->cleanFile();
+				break;
+			}
+			default:
+			{
+				delete manager;
+				cout << "注销成功" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+		}
+	}
 }
 
 int main() {

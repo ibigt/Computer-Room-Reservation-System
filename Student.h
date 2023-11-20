@@ -29,6 +29,6 @@ class Student : public Identity
 		void cancelOrder();
 
 	public:
-		int m_id;
+		int m_Id;
 
 };
