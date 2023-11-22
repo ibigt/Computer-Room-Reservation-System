@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <chrono>
+#include <thread>
 #include "globalFile.h"
 #include "identity.h"
 #include "student.h"
@@ -8,6 +10,68 @@
 #include "manager.h"
 
 using namespace std;
+
+/*
+* 在机房预约系统.cpp中，当用户登录的是管理员，添加管理员菜单接口
+* 将不同的分支提供出来
+* 添加账号
+* 查看账号
+* 查看机房
+* 清空预约
+* 注销登录
+* 实现注销功能
+*/
+void managerMenu(Identity* person)
+{
+	while (true)
+	{
+		//管理员菜单
+		//子类指针直接调用公共接口
+		person->operMenu();
+
+		//父类指针强转成子类指针，可以调用私有接口
+		Manager* manager = (Manager*)person;
+
+		int select;
+		cin >> select;
+
+		switch (select)
+		{
+		case 1:
+		{
+			cout << "添加账号" << endl;
+			manager->addPerson();
+			break;
+		}
+		case 2:
+		{
+			cout << "查看账号" << endl;
+			manager->showPerson();
+			break;
+		}
+		case 3:
+		{
+			cout << "查看机房" << endl;
+			manager->showComputer();
+			break;
+		}
+		case 4:
+		{
+			cout << "清空预约" << endl;
+			manager->cleanFile();
+			break;
+		}
+		default:
+		{
+			delete manager;
+			cout << "注销成功" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+		}
+	}
+}
 
 
 /*
@@ -68,9 +132,16 @@ void LoginIn(string fileName, int type)
 		{
 			if (fId == id && fName == name && fPwd == pwd)
 			{
-				cout << "学生 " << name << " 登录验证成功！" << endl;
-				cout << string(30, '-') << endl;
-				system("pause");
+				cout << string(80, '-') << endl;
+				for (int i = 0; i < 6; i++)
+				{
+					cout << ". ";
+					std::this_thread::sleep_for(std::chrono::milliseconds(200));
+				}
+
+				cout << endl << "学生 " << name << " 登录验证成功！" << endl;
+				std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
 				system("cls");
 				person = new Student(id, name, pwd);
 				return;
@@ -85,9 +156,15 @@ void LoginIn(string fileName, int type)
 		{
 			if (fId == id && fName == name && fPwd == pwd)
 			{
-				cout << "教师 " << name << " 登录验证成功！" << endl;
-				cout << string(30, '-') << endl;
-				system("pause");
+				cout << string(80, '-') << endl;
+				for (int i = 0; i < 6; i++)
+				{
+					cout << ". ";
+					std::this_thread::sleep_for(std::chrono::milliseconds(200));
+				}
+				cout << endl << "教师 " << name << " 登录验证成功！" << endl;
+				std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
 				system("cls");
 				person = new Teacher(id, name, pwd);
 				return;
@@ -102,11 +179,18 @@ void LoginIn(string fileName, int type)
 			//管理员登陆验证
 			if (fName == name && fPwd == pwd)
 			{
-				cout << "管理员 " << name << " 登录验证成功！" << endl;
-				cout << string(30, '-') << endl;
-				//system("pause");
+				cout << string(80, '-') << endl;
+				for(int i = 0; i < 6; i++)
+				{
+					cout << ". " ;
+					std::this_thread::sleep_for(std::chrono::milliseconds(200)); 
+				}
+				cout << endl << "管理员 " << name << " 登录验证成功！" << endl;
+				std::this_thread::sleep_for(std::chrono::milliseconds(500));
+				
 				system("cls");
 				person = new Manager(name, pwd);
+				managerMenu(person);
 				return;
 			}
 		}
@@ -119,56 +203,6 @@ void LoginIn(string fileName, int type)
 	return;
 }
 
-void managerMenu(Identity* person)
-{
-	while (true)
-	{
-		//管理员菜单
-		person->operMenu();
-
-		//父类指针强转成子类指针，可以调用私有接口
-		Manager* manager = (Manager*)person;
-
-		int select;
-		cin >> select;
-		
-		switch(select)
-		{
-			case 1:
-			{
-				cout << "添加账号" << endl;
-				manager->addPerson();
-				break;
-			}
-			case 2:
-			{
-				cout << "查看账号" << endl;
-				manager->showPerson();
-				break;
-			}
-			case 3:
-			{
-				cout << "查看机房" << endl;
-				manager->showComputer();
-				break;
-			}
-			case 4:
-			{
-				cout << "清空预约" << endl;
-				manager->cleanFile();
-				break;
-			}
-			default:
-			{
-				delete manager;
-				cout << "注销成功" << endl;
-				system("pause");
-				system("cls");
-				return;
-			}
-		}
-	}
-}
 
 int main() {
 
