@@ -1,5 +1,8 @@
 #pragma once
+#include <vector>
 #include "identity.h"
+#include "student.h"
+#include "teacher.h"
 using namespace std;
 
 class Manager : public Identity
@@ -26,5 +29,14 @@ public:
 
 	//清空预约记录
 	void cleanFile();
+
+	//去重功能
+	void initVector();
+
+public:
+	
+	vector<Student> vStu;
+
+	vector<Teacher> vTea;
 
 };

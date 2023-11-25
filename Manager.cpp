@@ -12,6 +12,7 @@ Manager::Manager(string name, string pwd)
 {
 	this->m_Name = name;
 	this->m_Pwd = pwd;
+	this->initVector();
 }
 
 //选择菜单
@@ -93,4 +94,47 @@ void Manager::showComputer()
 //清空预约记录
 void Manager::cleanFile()
 {
+}
+
+//初始化容器
+void Manager::initVector()
+{
+	ifstream ifs;
+	vStu.clear();
+	vStu.clear();
+
+
+	Student s;
+	
+	ifs.open(STUDENT_FILE, ios::in);
+	if (!ifs.is_open())
+	{
+		cout << "文件打开失败！" << endl;
+		return;
+	}
+
+	while (ifs >> s.m_Id && ifs >> s.m_Name && ifs >> s.m_Pwd)
+	{
+		vStu.push_back(s);
+	}
+	cout << "当前学生数量为： " << vStu.size() << endl;
+	ifs.close(); 
+
+
+	Teacher t;
+
+	ifs.open(TEACHER_FILE, ios::in);
+	if (!ifs.is_open())
+	{
+		cout << "文件打开失败！" << endl;
+		return;
+	}
+
+	while (ifs >> t.m_EmpId && ifs >> t.m_Name && ifs >> t.m_Pwd)
+	{
+		vTea.push_back(t);
+	}
+	cout << "当前老师数量为： " << vTea.size() << endl;
+	ifs.close(); 
+
 }
