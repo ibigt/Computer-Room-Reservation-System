@@ -1,4 +1,5 @@
 #include <fstream>
+#include <algorithm>
 #include "Manager.h"
 #include "GlobalFile.h"
 
@@ -95,6 +96,9 @@ void Manager::addPerson()
 			system("cls");
 			ofs.close();
 
+			//初始化容器
+			initVector();
+
 			break;
 		}
 
@@ -102,9 +106,48 @@ void Manager::addPerson()
 
 }
 
+void printStudent(Student& s)
+{
+	cout << "学号：" << s.m_Id << ", 姓名：" << s.m_Name << "， 密码：" << s.m_Pwd << endl;
+}
+
+void printTeacher(Teacher& t)
+{
+	cout << "职工号：" << t.m_EmpId << ", 姓名：" << t.m_Name << "， 密码：" << t.m_Pwd << endl;
+}
+
 //查看账号
 void Manager::showPerson()
 {
+	int select = 0;
+
+	while (true)
+	{
+		cout << "1、查看所有学生" << endl;
+		cout << "2、查看所有老师" << endl;
+		cout << "请选择查看内容：";
+		cin >> select;
+
+		if (select == 1)
+		{
+			for_each(vStu.begin(), vStu.end(), printStudent);
+			break;
+		}
+		else if (select == 2)
+		{
+			for_each(vTea.begin(), vTea.end(), printTeacher);
+			break;
+		}
+		else 
+		{
+			cout << "选择错误，请重新选择！" << endl;
+		}
+
+	}
+
+	system("pause");
+	system("cls");
+
 }
 
 //查看机房信息
@@ -138,7 +181,6 @@ void Manager::initVector()
 		vStu.push_back(s);
 	}
 	cout << "当前学生数量为： " << vStu.size() << endl;
-	ifs.close(); 
 
 
 	//Teacher t;
