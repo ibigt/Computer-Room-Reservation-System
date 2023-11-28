@@ -38,11 +38,14 @@ void Manager::operMenu()
 //添加账号  
 void Manager::addPerson()
 {
-	int select = 0;
-	string fileName;
 	int id = 0;
-	string name;
+	int select = 0;
+
+	string tip;
 	string pwd;
+	string name;
+	string fileName;
+	string errorTip;
 
 	cout << "1、添加学生" << endl;
 	cout << "2、添加老师" << endl;
@@ -50,34 +53,52 @@ void Manager::addPerson()
 
 	cin >> select;
 
+
 	if (select == 1)
 	{
 		fileName = STUDENT_FILE;
-		cout << "请输入学号：" ;
-		cin >> id;
+		errorTip = "学生号重复，请重新输入！";
+		tip =  "请输入学号：";
 	}
 	else if (select == 2)
 	{
 		fileName = TEACHER_FILE;
-		cout << "请输入教师编号：" ;
-		cin >> id;
+		errorTip = "职工号重复，请重新输入！";
+		tip = "请输入教师编号：";
 	}
 
-	cout << "请输入姓名：" ;
-	cin >> name;
-	cout << "请输入密码：" ;
-	cin >> pwd;
+	while (true)
+	{
+		cout << tip;
+		cin >> id;
+		bool res = checkRepeat(select, id);
 
+		if (res)
+		{
+			cout << errorTip << endl;
+			cout << string(80, '-') << endl;
+		}
+		else
+		{
+			cout << "请输入姓名：";
+			cin >> name;
+			cout << "请输入密码：";
+			cin >> pwd;
 
-	ofstream ofs;
-	//ios::app 追加写，ios::out 为写打开文件
-	ofs.open(fileName, ios::out | ios::app);
-	ofs << id << " " << name << " " << pwd << endl;
-	cout << "添加成功！" << endl;
+			ofstream ofs;
+			//ios::app 追加写，ios::out 为写打开文件
+			ofs.open(fileName, ios::out | ios::app);
+			ofs << id << " " << name << " " << pwd << endl;
+			cout << "添加成功！" << endl;
 
-	system("pause");
-	system("cls");
-	ofs.close();
+			system("pause");
+			system("cls");
+			ofs.close();
+
+			break;
+		}
+
+	}
 
 }
 
@@ -103,7 +124,6 @@ void Manager::initVector()
 	vStu.clear();
 	vStu.clear();
 
-
 	Student s;
 	
 	ifs.open(STUDENT_FILE, ios::in);
@@ -121,20 +141,46 @@ void Manager::initVector()
 	ifs.close(); 
 
 
-	Teacher t;
+	//Teacher t;
 
-	ifs.open(TEACHER_FILE, ios::in);
-	if (!ifs.is_open())
-	{
-		cout << "文件打开失败！" << endl;
-		return;
-	}
+	//ifs.open(TEACHER_FILE, ios::in);
+	//if (!ifs.is_open())
+	//{
+	//	cout << "文件打开失败！" << endl;
+	//	return;
+	//}
 
-	while (ifs >> t.m_EmpId && ifs >> t.m_Name && ifs >> t.m_Pwd)
-	{
-		vTea.push_back(t);
-	}
-	cout << "当前老师数量为： " << vTea.size() << endl;
+	//while (ifs >> t.m_EmpId && ifs >> t.m_Name && ifs >> t.m_Pwd)
+	//{
+	//	vTea.push_back(t);
+	//}
+	//cout << "当前老师数量为： " << vTea.size() << endl;
 	ifs.close(); 
 
+}
+
+bool Manager::checkRepeat(int select, int id)
+{
+	if (select == 1)
+	{
+		for (vector<Student>::iterator it = vStu.begin(); it != vStu.end(); it++)
+		{
+			if (id == it->m_Id)
+			{
+				return true;
+			}
+		}
+	}
+	else
+	{
+		for (vector<Teacher>::iterator it = vTea.begin(); it != vTea.end(); it++)
+		{
+			if (id == it->m_EmpId)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
