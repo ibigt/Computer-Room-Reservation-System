@@ -1,6 +1,6 @@
 #pragma once
 #include "Identity.h"
-
+#include "ComputerRoom.h"
 using namespace std;
 
 class Student : public Identity 
@@ -28,7 +28,11 @@ class Student : public Identity
 		//取消预约
 		void cancelOrder();
 
+		//初始化容器
+		virtual void initVector();
+
 	public:
 		int m_Id;
+		vector<ComputerRoom> vCom;
 
 };

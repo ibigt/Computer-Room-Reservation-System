@@ -1,6 +1,6 @@
 #pragma once
 #include "Identity.h"
-
+#include "ComputerRoom.h"
 using namespace std;
 
 class Teacher : public Identity
@@ -21,7 +21,11 @@ class Teacher : public Identity
 		//…Û∫À‘§‘º
 		void validOrder();
 
+		//≥ı ºªØ»›∆˜
+		virtual void initVector();
+
 	public:
 		int m_EmpId;
+		vector<ComputerRoom> vCom;
 
 };
