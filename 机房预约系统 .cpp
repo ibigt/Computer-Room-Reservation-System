@@ -166,7 +166,7 @@ void LoginIn(string fileName, int type)
 				std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
 				system("cls");
-				//person = new Teacher(id, name, pwd);
+				person = new Teacher(id, name, pwd);
 				return;
 			}
 		}

@@ -163,41 +163,42 @@ void Manager::cleanFile()
 //初始化容器
 void Manager::initVector()
 {
-	ifstream ifs;
-	vStu.clear();
-	vStu.clear();
-
 	Student s;
+	Teacher t;
+	ifstream ifs_S;
+	ifstream ifs_T;
 	
-	ifs.open(STUDENT_FILE, ios::in);
-	if (!ifs.is_open())
+	vStu.clear();
+	vTea.clear();
+
+	ifs_S.open(STUDENT_FILE, ios::in);
+	if (!ifs_S.is_open())
 	{
 		cout << "文件打开失败！" << endl;
 		return;
 	}
 
-	while (ifs >> s.m_Id && ifs >> s.m_Name && ifs >> s.m_Pwd)
+	while (ifs_S >> s.m_Id && ifs_S >> s.m_Name && ifs_S >> s.m_Pwd)
 	{
 		vStu.push_back(s);
 	}
 	cout << "当前学生数量为： " << vStu.size() << endl;
+	ifs_S.clear();
+	
 
+	ifs_T.open(TEACHER_FILE, ios::in);
+	if (!ifs_T.is_open())
+	{
+		cout << "文件打开失败！" << endl;
+		return;
+	}
 
-	//Teacher t;
-
-	//ifs.open(TEACHER_FILE, ios::in);
-	//if (!ifs.is_open())
-	//{
-	//	cout << "文件打开失败！" << endl;
-	//	return;
-	//}
-
-	//while (ifs >> t.m_EmpId && ifs >> t.m_Name && ifs >> t.m_Pwd)
-	//{
-	//	vTea.push_back(t);
-	//}
-	//cout << "当前老师数量为： " << vTea.size() << endl;
-	ifs.close(); 
+	while (ifs_T >> t.m_EmpId && ifs_T >> t.m_Name && ifs_T >> t.m_Pwd)
+	{
+		vTea.push_back(t);
+	}
+	cout << "当前老师数量为： " << vTea.size() << endl;
+	ifs_T.close();
 
 }
 
