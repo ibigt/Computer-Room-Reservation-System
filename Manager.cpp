@@ -166,6 +166,12 @@ void Manager::showComputer()
 //清空预约记录
 void Manager::cleanFile()
 {
+	ofstream ofs(ORDER_FILE, ios::trunc);
+	ofs.close();
+
+	cout << "清空成功！" << endl;
+	system("pause");
+	system("cls");
 }
 
 //初始化容器
@@ -181,6 +187,7 @@ void Manager::initVector()
 	
 	vStu.clear();
 	vTea.clear();
+	vCom.clear();
 
 	ifs_S.open(STUDENT_FILE, ios::in);
 	if (!ifs_S.is_open())
@@ -224,7 +231,7 @@ void Manager::initVector()
 		vCom.push_back(c);
 	}
 	cout << "当前机房数量为： " << vCom.size() << endl;
-	ifs_T.close();
+	ifs_C.close();
 
 }
 
