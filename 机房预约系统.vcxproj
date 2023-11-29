@@ -128,6 +128,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="OrderFile.cpp" />
+    <ClCompile Include="OrderFile.h" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="Teacher.cpp" />
     <ClCompile Include="Teacher.h" />
