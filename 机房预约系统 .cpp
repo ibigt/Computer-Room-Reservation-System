@@ -23,56 +23,135 @@ using namespace std;
 */
 void managerMenu(Identity* person)
 {
+	//父类指针强转成子类指针，可以调用私有接口
+	Manager* manager = (Manager*)person;
+
 	while (true)
 	{
 		//管理员菜单
 		//子类指针直接调用公共接口
 		person->operMenu();
 
-		//父类指针强转成子类指针，可以调用私有接口
-		Manager* manager = (Manager*)person;
-
 		int select;
 		cin >> select;
 
 		switch (select)
 		{
-		case 1:
-		{
-			cout << "添加账号" << endl;
-			manager->addPerson();
-			break;
-		}
-		case 2:
-		{
-			cout << "查看账号" << endl;
-			manager->showPerson();
-			break;
-		}
-		case 3:
-		{
-			cout << "查看机房" << endl;
-			manager->showComputer();
-			break;
-		}
-		case 4:
-		{
-			cout << "清空预约" << endl;
-			manager->cleanFile();
-			break;
-		}
-		default:
-		{
-			delete manager;
-			cout << "注销成功" << endl;
-			system("pause");
-			system("cls");
-			return;
-		}
+			case 1:
+			{
+				cout << "添加账号" << endl;
+				manager->addPerson();
+				break;
+			}
+			case 2:
+			{
+				cout << "查看账号" << endl;
+				manager->showPerson();
+				break;
+			}
+			case 3:
+			{
+				cout << "查看机房" << endl;
+				manager->showComputer();
+				break;
+			}
+			case 4:
+			{
+				cout << "清空预约" << endl;
+				manager->cleanFile();
+				break;
+			}
+			case 0:
+			{
+				delete manager;
+				cout << "注销成功" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+			default:
+			{
+				cout << "操作选择错误，请重新选择！" << endl;
+				system("pause");
+				system("cls");
+				break;
+			}
 		}
 	}
+
+	delete manager;
 }
 
+
+/*
+* 在机房预约系统.cpp中，当用户登录的是学生，添加学生菜单接口
+* 将不同的分支提供出来
+* 申请预约
+* 查看我的预约
+* 查看所有预约
+* 取消预约
+* 注销登录
+* 实现注销功能
+*/
+void studentMenu(Identity* person)
+{
+	Student* stu = (Student*)person;
+
+	while (true)
+	{
+		person->operMenu();
+
+		int select = 0;
+		cin >> select;
+
+		switch (select)
+		{
+			case 1:
+			{
+				cout << "申请预约" << endl;
+				stu->applyOrder();
+				break;
+			}
+			case 2:
+			{
+				cout << "查看我的预约" << endl;
+				stu->showMyOrder();
+				break;
+			}
+			case 3:
+			{
+				cout << "查看所有预约" << endl;
+				stu->showAllOrder();
+				break;
+			}
+			case 4:
+			{
+				cout << "取消预约" << endl;
+				stu->cancelOrder();
+				break;
+			}
+			case 0:
+			{
+				delete stu;
+				cout << "注销成功" << endl;
+				system("pause");
+				system("cls");
+				return;
+			}
+			default:
+			{
+				cout << "操作选择错误，请重新选择！" << endl;
+				system("pause");
+				system("cls");
+				break;
+			}
+		}
+		
+	}
+
+	delete stu;
+
+}
 
 /*
 * 功能描述：根据用户的选择，进入不同的身份登录
@@ -144,6 +223,7 @@ void LoginIn(string fileName, int type)
 
 				system("cls");
 				person = new Student(id, name, pwd);
+				studentMenu(person);
 				return;
 			}
 		}
