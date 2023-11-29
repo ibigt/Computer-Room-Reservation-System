@@ -116,6 +116,11 @@ void printTeacher(Teacher& t)
 	cout << "职工号：" << t.m_EmpId << ", 姓名：" << t.m_Name << "， 密码：" << t.m_Pwd << endl;
 }
 
+void printComputerRoom(ComputerRoom& c)
+{
+	cout << "机房门号：" << c.m_ComId << ", 机房容量：" << c.m_MaxNum << endl;
+}
+
 //查看账号
 void Manager::showPerson()
 {
@@ -153,6 +158,9 @@ void Manager::showPerson()
 //查看机房信息
 void Manager::showComputer()
 {
+	for_each(vCom.begin(), vCom.end(), printComputerRoom);
+	system("pause");
+	system("cls");
 }
 
 //清空预约记录
@@ -165,8 +173,11 @@ void Manager::initVector()
 {
 	Student s;
 	Teacher t;
+	ComputerRoom c;
+
 	ifstream ifs_S;
 	ifstream ifs_T;
+	ifstream ifs_C;
 	
 	vStu.clear();
 	vTea.clear();
@@ -198,6 +209,21 @@ void Manager::initVector()
 		vTea.push_back(t);
 	}
 	cout << "当前老师数量为： " << vTea.size() << endl;
+	ifs_T.close();
+
+
+	ifs_C.open(COMPUTER_FILE, ios::in);
+	if (!ifs_C.is_open())
+	{
+		cout << "文件打开失败！" << endl;
+		return;
+	}
+
+	while (ifs_C >> c.m_ComId && ifs_C >> c.m_MaxNum)
+	{
+		vCom.push_back(c);
+	}
+	cout << "当前机房数量为： " << vCom.size() << endl;
 	ifs_T.close();
 
 }

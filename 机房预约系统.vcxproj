@@ -134,6 +134,7 @@
     <ClCompile Include="机房预约系统 .cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ComputerRoom.h" />
     <ClInclude Include="GlobalFile.h" />
     <ClInclude Include="Identity.h" />
     <ClInclude Include="Manager.h" />
@@ -141,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="admin.txt" />
+    <Text Include="computer.txt" />
     <Text Include="student.txt" />
     <Text Include="teacher.txt" />
   </ItemGroup>

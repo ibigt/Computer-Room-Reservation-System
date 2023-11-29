@@ -3,6 +3,7 @@
 #include "identity.h"
 #include "student.h"
 #include "teacher.h"
+#include "computerroom.h"
 using namespace std;
 
 class Manager : public Identity
@@ -41,5 +42,7 @@ public:
 	vector<Student> vStu;
 
 	vector<Teacher> vTea;
+
+	vector<ComputerRoom> vCom;
 
 };
