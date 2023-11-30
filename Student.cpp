@@ -122,6 +122,12 @@ void Student::showMyOrder()
 
 	for (int i = 0; i < of.m_orderNum; i++)
 	{
+		// int atoi(const char* str); 将字符串转换成整数
+		// c_str()就是将C++的string转化为(const char*)C风格字符串数组
+		if (this->m_Id != atoi(of.m_orderData[i]["stuId"].c_str()))
+		{
+			continue;
+		}
 		cout << "预约日期：周" << of.m_orderData[i]["date"];
 		cout << " 时段：" << (of.m_orderData[i]["interval"] == "1" ? "上午" : "下午");
 		cout << " 机房：" << of.m_orderData[i]["roomId"];
@@ -153,6 +159,43 @@ void Student::showMyOrder()
 //查看所有预约
 void Student::showAllOrder()
 {
+	OrderFile of;
+	if (of.m_orderNum == 0)
+	{
+		cout << "无预约记录" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	for (int i = 0; i < of.m_orderNum; i++)
+	{
+		cout << "预约日期：周" << of.m_orderData[i]["date"];
+		cout << " 时段：" << (of.m_orderData[i]["interval"] == "1" ? "上午" : "下午");
+		cout << " 机房：" << of.m_orderData[i]["roomId"];
+		string status = " 状态： ";  // 0 取消的预约   1 审核中   2 已预约 -1 预约失败
+		if (of.m_orderData[i]["status"] == "1")
+		{
+			status += "审核中";
+		}
+		else if (of.m_orderData[i]["status"] == "2")
+		{
+			status += "预约成功";
+		}
+		else if (of.m_orderData[i]["status"] == "-1")
+		{
+			status += "审核未通过，预约失败";
+		}
+		else
+		{
+			status += "预约已取消";
+		}
+
+		cout << status << endl;
+
+	}
+	system("pause");
+	system("cls");
 
 }
 
