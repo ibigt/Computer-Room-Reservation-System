@@ -2,10 +2,6 @@
 #include "OrderFile.h"
 #include "GlobalFile.h"
 
-////默认构造函数
-//OrderFile::OrderFile()
-//{
-//}
 
 //有参构造函数
 OrderFile::OrderFile()
@@ -81,4 +77,27 @@ OrderFile::OrderFile()
 
 	}
 
+}
+
+
+void OrderFile::updateOrderFile()
+{
+	if (this->m_orderNum == 0)
+	{
+		return;
+	}
+
+	ofstream ofs(ORDER_FILE, ios::out | ios::trunc);
+
+	for (int i = 0; i < this->m_orderNum; i++)
+	{
+		ofs << "date:" << this->m_orderData[i]["date"] << " ";
+		ofs << "interval:" << this->m_orderData[i]["interval"] << " ";
+		ofs << "stuId:" << this->m_orderData[i]["stuId"] << " ";
+		ofs << "stuName:" << this->m_orderData[i]["stuName"] << " ";
+		ofs << "roomId:" << this->m_orderData[i]["roomId"] << " ";
+		ofs << "status:" << this->m_orderData[i]["status"] << endl;
+	}
+
+	ofs.close();
 }
