@@ -205,20 +205,20 @@ void teacherMenu(Identity* person)
 
 		}
 		
-		delete tea;
-
 	}
+
+	delete tea;
 
 }
 
 /*
+* 登录功能
 * 功能描述：根据用户的选择，进入不同的身份登录
 * void LoginIn(string fileName, int type)
 * fileName  --- 操作的文件名
 * type      ---  登录的身份  （1代表学生、2代表老师、3代表管理员）
 */
 
-//登录功能
 void LoginIn(string fileName, int type)
 {
 	int id;
@@ -269,7 +269,7 @@ void LoginIn(string fileName, int type)
 		{
 			if (fId == id && fName == name && fPwd == pwd)
 			{
-				cout << string(80, '-') << endl;
+				cout << string(50, '-') << endl;
 				for (int i = 0; i < 6; i++)
 				{
 					cout << ". ";
@@ -294,7 +294,7 @@ void LoginIn(string fileName, int type)
 		{
 			if (fId == id && fName == name && fPwd == pwd)
 			{
-				cout << string(80, '-') << endl;
+				cout << string(50, '-') << endl;
 				for (int i = 0; i < 6; i++)
 				{
 					cout << ". ";
@@ -318,7 +318,7 @@ void LoginIn(string fileName, int type)
 			//管理员登陆验证
 			if (fName == name && fPwd == pwd)
 			{
-				cout << string(80, '-') << endl;
+				cout << string(50, '-') << endl;
 				for(int i = 0; i < 6; i++)
 				{
 					cout << ". " ;
@@ -347,26 +347,26 @@ int main() {
 
 	int select = 0;
 
-	cout << "======================  欢迎来到机房预约系统  ====================="
-		<< endl;
-	cout << endl << "请输入您的身份" << endl;
-	cout << "\t\t -------------------------------\n";
-	cout << "\t\t|                               |\n";
-	cout << "\t\t|          1.学生代表           |\n";
-	cout << "\t\t|                               |\n";
-	cout << "\t\t|          2.老    师           |\n";
-	cout << "\t\t|                               |\n";
-	cout << "\t\t|          3.管 理 员           |\n";
-	cout << "\t\t|                               |\n";
-	cout << "\t\t|          0.退    出           |\n";
-	cout << "\t\t|                               |\n";
-	cout << "\t\t -------------------------------\n";
-	cout << "输入您的选择: ";
-
-	cin >> select;
-
-	switch(select)
+	while (true)
 	{
+		cout << "======================  欢迎来到机房预约系统  =====================" << endl;
+		cout << endl << "请输入您的身份" << endl;
+		cout << "\t\t -------------------------------\n";
+		cout << "\t\t|                               |\n";
+		cout << "\t\t|          1.学生代表           |\n";
+		cout << "\t\t|                               |\n";
+		cout << "\t\t|          2.老    师           |\n";
+		cout << "\t\t|                               |\n";
+		cout << "\t\t|          3.管 理 员           |\n";
+		cout << "\t\t|                               |\n";
+		cout << "\t\t|          0.退    出           |\n";
+		cout << "\t\t|                               |\n";
+		cout << "\t\t -------------------------------\n";
+		cout << "输入您的选择: ";
+
+		cin >> select;
+		switch (select)
+		{
 		case 1:
 			LoginIn(STUDENT_FILE, select);
 			break;
@@ -388,6 +388,7 @@ int main() {
 			system("pause");
 			system("cls");
 			break;
+		}
 		}
 	}
 

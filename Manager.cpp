@@ -50,22 +50,30 @@ void Manager::addPerson()
 
 	cout << "1、添加学生" << endl;
 	cout << "2、添加老师" << endl;
-	cout << "请输入添加账号的类型：" ;
+	cout << "请输入添加账号的类型：";
 
-	cin >> select;
-
-
-	if (select == 1)
+	while (true)
 	{
-		fileName = STUDENT_FILE;
-		errorTip = "学生号重复，请重新输入！";
-		tip =  "请输入学号：";
-	}
-	else if (select == 2)
-	{
-		fileName = TEACHER_FILE;
-		errorTip = "职工号重复，请重新输入！";
-		tip = "请输入教师编号：";
+		cin >> select;
+
+		if (select == 1)
+		{
+			fileName = STUDENT_FILE;
+			errorTip = "学生号重复，请重新输入！";
+			tip = "请输入学号：";
+			break;
+		}
+		else if (select == 2)
+		{
+			fileName = TEACHER_FILE;
+			errorTip = "职工号重复，请重新输入！";
+			tip = "请输入教师编号：";
+			break;
+		}
+		else
+		{
+			cout << "账号类型选择错误，请重新选择：";
+		}
 	}
 
 	while (true)
